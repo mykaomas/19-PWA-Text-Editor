@@ -18,12 +18,32 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        filename: 'index.html',
+        chunks: ['main'],
+      }),
+      new WebpackPwaManifest({
+        name: 'JATE',
+        short_name: 'JATE',
+        description: 'Just Another Text Editor',
+        background_color: '#ffffff',
+        theme_color: '#31a9e1',
+        icons: [
+          {
+            src: path.resolve('src/assets/icons/icon_96x96.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
     ],
-
     module: {
       rules: [
-        
       ],
     },
   };
