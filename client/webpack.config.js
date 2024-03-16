@@ -31,7 +31,7 @@ module.exports = () => {
         theme_color: '#31a9e1',
         icons: [
           {
-            src: path.resolve('src/assets/icons/icon_96x96.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
@@ -44,6 +44,21 @@ module.exports = () => {
     ],
     module: {
       rules: [
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread'],
+            },
+          },
+        },
       ],
     },
   };
